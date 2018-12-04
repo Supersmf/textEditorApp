@@ -3,5 +3,5 @@ export interface Item{
 	title: string;
 	content: string;
 	edit: boolean;
-	tags: []
+	tags: string[]
 }

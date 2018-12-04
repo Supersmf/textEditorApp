@@ -29,6 +29,12 @@ export class ListitemsComponent implements OnInit  {
         item.content = (item.content.replace(/e/g, `<span class="bg-success text-white>${e}</span>`));
       })
     }*/
+    if(!item.edit) {
+      let temp = item.content.split(' ');
+      temp = temp.filter((e) => e[0] === '#');
+      item.content = (item.content.replace(/#/g, ''));
+      temp.forEach((e) => item.tags.push(e.slice(1)));
+    }
   }
 
   onCancel(item: Item){

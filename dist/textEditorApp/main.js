@@ -348,6 +348,12 @@ var ListitemsComponent = /** @class */ (function () {
             item.content = (item.content.replace(/e/g, `<span class="bg-success text-white>${e}</span>`));
           })
         }*/
+        if (!item.edit) {
+            var temp = item.content.split(' ');
+            temp = temp.filter(function (e) { return e[0] === '#'; });
+            item.content = (item.content.replace(/#/g, ''));
+            temp.forEach(function (e) { return item.tags.push(e.slice(1)); });
+        }
     };
     ListitemsComponent.prototype.onCancel = function (item) {
         this.items = this.data.getData();
