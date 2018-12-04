@@ -1,0 +1,13 @@
+<div class="row" id="container">
+  <div class="col-12 text-center" >
+    <div class="list-group" id="list-tab" role="tablist">
+      <app-addform (render)="list.ngOnInit()" (filter)="list.onFilter($event)" #form></app-addform>
+    </div>
+  </div>
+  <div class="col-12" id="content">
+    <div class="tab-content" id="nav-tabContent">
+      <h1 class="listtitle">List of notes</h1>
+      <app-listitems #list (moveTag)="form.importTags()"></app-listitems>
+    </div>
+  </div>
+</div>

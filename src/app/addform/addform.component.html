@@ -1,0 +1,82 @@
+<div class="row justify-content-between m-4">
+	<div class="input-group col-4">
+		<div class="input-group-prepend">
+		    <label class="input-group-text" for="inputGroupSelect01">Choose tag</label>
+		</div>
+		<select class="custom-select col-8" id="inputGroupSelect01" (change)="onSelect($event.target.value)">
+		  <option *ngFor="let tag of tags" value="{{ tag }}">{{ tag }}</option>
+		</select>
+	</div>
+	<div class="col-2">
+		<button *ngIf="!showForm" (click)="onShowForm()" class="btn btn-success text-white">Add new note</button>
+	</div>
+</div>
+<div *ngIf="showForm">
+	<form #t="ngForm" (ngSubmit)="onSubmit(t)" class="rounded shadow-sm m-4 p-4">
+		<div class="form-row justify-content-left col-12">  	
+	  	<label for="inputCity" class="col-2">Title:</label>
+	    <div class="form-group col-6 ">
+	      	<input 
+		      	type="text" 
+		      	class="form-control"
+		      	id="inputTitle" 
+		      	placeholder="Title"
+		      	required
+		      	ngModel
+		      	name="title"
+		      	#title="ngModel"
+		      	minlength="3"
+		      	maxlength="25">
+		</div>
+		<div class="alert alert-danger col-4 p-1" *ngIf="title.touched && !title.valid">
+	      		<div *ngIf="title.errors.required">This field is required</div>
+	      		<div *ngIf="title.errors.minlength">
+	      			Title should be minimum {{ title.errors.minlength.requiredLength }} characters.
+	      		</div>
+	      	</div>
+	  </div> 
+
+	  <div class="form-row justify-content-left col-12">  	
+	  	<label for="inputCity" class="col-2">Content:</label>
+	    <div class="form-group col-6 ">
+	      <textarea
+	      	type="text" 
+	      	class="form-control"
+	      	id="inputContent" 
+	      	placeholder="Text content..."
+	      	required
+	      	ngModel
+	      	name="content"
+	      	#content="ngModel"
+	      	minlength="3"
+	      	maxlength="25">
+	      	</textarea>
+	    </div>
+	    <div class="alert alert-danger col-4 p-1" *ngIf="content.touched && !content.valid">
+	      		<div *ngIf="content.errors.required">This field is required</div>
+	      		<div *ngIf="content.errors.minlength">
+	      			Content should be minimum {{ content.errors.minlength.requiredLength }} characters.
+	      		</div>
+	    </div>
+	  </div>
+
+	  	<div class="form-row justify-content-left col-12">  	
+	  	<label for="inputCity" class="col-2">Tags:</label>
+	    <div class="form-group col-6 ">
+	      <input 
+	      	type="text" 
+	      	class="form-control"
+	      	id="iputTag" 
+	      	placeholder="Tags through space..."
+	      	ngModel
+	      	name="tag"
+	      	#tag="ngModel"
+	      	maxlength="25">	      	
+	    </div>
+	  </div>
+	  <div class="form-row justify-content-end col-8">
+	  	<button type="submit" class="btn btn-success col-2" [disabled]="!t.valid">Save</button>
+	  	<button class="btn btn-primary col-2 text-white ml-2" (click)="onShowForm()">Cancel</button>  	
+	  </div>
+	</form>
+</div>
